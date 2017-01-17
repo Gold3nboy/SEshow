@@ -1,8 +1,12 @@
-*.aux
+*.run.xml
 *.log
-*.nav
 *.out
-*.snm
-*.synctex.gz
 *.toc
+*.run.xml
+*.aux
+*.bak
+*.bcf
+*.nav
+*.snm
 *.vrb
+*.swp

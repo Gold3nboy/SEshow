@@ -51,6 +51,7 @@
 \definecolor{color2}{HTML}{FF7a01} % Color of the boxes behind the abstract and headings
 \definecolor{color3}{HTML}{202020} % Background color
 
+\definecolor{baseColor}{HTML}{FF7a01} % Color of the boxes behind the abstract and headings
 \mode<presentation> {
 
 % The Beamer class comes with a number of default slide themes
@@ -83,8 +84,9 @@
 
 \setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
 
- \setbeamercolor*{palette primary}{use=structure,fg=color1,bg=color2!110 }
+ \setbeamercolor*{palette primary}{use=structure,fg=color2,bg=color2!110 }
  \setbeamercolor*{palette secondary}{use=structure,fg=color3,bg=color3}
+ \setbeamercolor{title}{fg=white,bg=baseColor!50!black}
 
 
 }
@@ -110,6 +112,114 @@ Flatulenza, University of Prone \\ % Your institution for the title page
 }
 \date{\today} % Date, can be changed to a custom date
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%   New style here
+
+\mode<presentation>{\usetheme{AnnArbor}}
+\usecolortheme{whale}
+
+\setbeamercolor{frametitle}{parent=subsection in head/foot}
+\setbeamercolor{frametitle right}{parent=section in head/foot}
+
+\makeatletter
+\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
+    color(0pt)=(frametitle.bg);
+    color(\paperwidth)=(frametitle right.bg)}
+
+\AtBeginDocument{
+    \pgfdeclareverticalshading{beamer@topshade}{\paperwidth}{%
+        color(0pt)=(bg);
+        color(4pt)=(black!50!bg)}
+}
+
+\addtobeamertemplate{headline}
+{}
+{%
+    \vskip-0.2pt
+    \pgfuseshading{beamer@topshade}
+    \vskip-2pt
+}
+
+
+\setbeamertemplate{frametitle}
+{%
+    \nointerlineskip%
+    \vskip-2pt%
+    \hbox{\leavevmode
+        \advance\beamer@leftmargin by -12bp%
+        \advance\beamer@rightmargin by -12bp%
+        \beamer@tempdim=\textwidth%
+        \advance\beamer@tempdim by \beamer@leftmargin%
+        \advance\beamer@tempdim by \beamer@rightmargin%
+        \hskip-\Gm@lmargin\hbox{%
+            \setbox\beamer@tempbox=\hbox{\begin{minipage}[b]{\paperwidth}%
+                    \vbox{}\vskip-.75ex%
+                    \leftskip0.3cm%
+                    \rightskip0.3cm plus1fil\leavevmode
+                    \insertframetitle%
+                    \ifx\insertframesubtitle\@empty%
+                    \strut\par%
+                    \else
+                    \par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+                    \fi%
+                    \nointerlineskip
+                    \vbox{}%
+                \end{minipage}}%
+                \beamer@tempdim=\ht\beamer@tempbox%
+                \advance\beamer@tempdim by 2pt%
+                \begin{pgfpicture}{0pt}{0pt}{\paperwidth}{\beamer@tempdim}
+                    \usebeamercolor{frametitle right}
+                    \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}}
+                    \pgfusepath{clip}
+                    \pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}}
+                \end{pgfpicture}
+                \hskip-\paperwidth%
+                \box\beamer@tempbox%
+            }%
+            \hskip-\Gm@rmargin%
+        }%
+        \nointerlineskip
+        \vskip-0.2pt
+        \hbox to\textwidth{\hskip-\Gm@lmargin\pgfuseshading{beamer@topshade}\hskip-\Gm@rmargin}
+        \vskip-2pt
+    }
+\makeatother
+
+\setbeamercolor{section in toc}{fg=red}
+%%%
+
+\setbeamercolor{structure}{fg=baseColor!80!black}
+\setbeamercolor*{block title example}{fg=blue!50,bg= blue!10}
+\setbeamercolor*{block body example}{fg= red,bg= blue!5}
+\usefonttheme{structuresmallcapsserif}
+
+\setbeamertemplate{footline}[page number]{} 
+
+\setbeamercolor{headline}{fg=blue!90!black,bg=baseColor!90!black}
+\setbeamercolor{palette primary}{fg=white,bg=baseColor!90!black}
+\setbeamercolor{palette secondary}{fg=white,bg=baseColor!90!black}
+\setbeamercolor{palette tertiary}{fg=white,bg=black}
+\setbeamercolor{frametitle}{fg=white,bg=baseColor!50!black}
+
+
+\colorlet{titleleft}{baseColor}
+\colorlet{titleright}{black}
+
+\setbeamercolor*{frametitle}{fg=white}
+
+\makeatletter
+\pgfdeclarehorizontalshading[titleleft,titleright]{beamer@frametitleshade}{\paperheight}{%
+    color(0pt)=(titleleft);
+    color(\paperwidth)=(titleright)}
+\makeatother
+
+%%%
+%%%  End new style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 \begin{document}
 
 \begin{frame}
@@ -126,8 +236,46 @@ Flatulenza, University of Prone \\ % Your institution for the title page
 %----------------------------------------------------------------------------------------
 
 %------------------------------------------------
-\section{First Section} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+\section{Introduzione} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
 %------------------------------------------------
+
+\begin{frame}
+    \frametitle{Introduzione}
+    In questa presentazione viene analizzato e riassunto il contentuto dell'articolo \textbf{``Automated Model-Based Android GUI Testing
+    using Multi-level GUI Comparison Criteria''} scritto da Young-Min Baek e Doo-Hwan Bae.
+\\~\\
+Presentazione preparata da 
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{GUI testing automatico(1)}
+    \begin{block}{Perch\'e dedicare particolare attenzione alle applicazioni Android?}
+        Attualmente le applicazioni android comprendono quasi il 90\% del mercato di software mobile.
+
+    \end{block}
+    \begin{block}{Cos'\`e il GUI testing?}
+        \`E una metodologia di testing che esplora una parte dello spazio degli stati del programma testato dando gli input al programma tramite l'interfaccia grafica.
+    \end{block}
+    \begin{block}{Perch\'e automatizzare il testing?}
+        Il motivo principale \`e il costo, l'esecuzione manuale dei test ha il costo eccessivo per molte applicazioni.
+        Inoltre l'esecuzione manuale dei test richiede tanto tempo e a volte non \`e in grado di individuare tutti gli errori.
+    \end{block}
+
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{GUI testing automatico(2)}
+Attualmente sul mercato si trovano dei tool per il GUI testing automatico che generano gli input in modo alleatorio, tentando di generare una sequenza di input che provoca il malfunzionamento del software.
+Nel testo viene citato un tool chiamato \emph{Android Monkey} che permette questo tipo di test.
+\\~\\
+Dato che si tratta essenzialmente di una ricerca locale nello spazio degli stati, questi metodi sono soggetti alle problematiche degli algoritmi di ricerca locale. Per esempio possono valutare lo stesso stato pi\`u volte.
+\\~\\
+L'approccio proposto dagli autori \`e di costruire un grafo degli stati della GUI, utilizzando dei criteri di equivalenza (GUICC) per distinguere gli stati.
+\end{frame}
+
+
 
 \subsection{Subsection Example} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
 
