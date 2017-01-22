@@ -236,18 +236,18 @@ Flatulenza, University of Prone \\ % Your institution for the title page
 %----------------------------------------------------------------------------------------
 
 %------------------------------------------------
-\section{Introduzione} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%\section{Introduzione} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
 %------------------------------------------------
 
-\begin{frame}
-    \frametitle{Introduzione}
-    In questa presentazione viene analizzato e riassunto il contentuto dell'articolo \textbf{``Automated Model-Based Android GUI Testing
-    using Multi-level GUI Comparison Criteria''} scritto da Young-Min Baek e Doo-Hwan Bae.
-\\~\\
-Presentazione preparata da 
+%\begin{frame}
+%    \frametitle{Introduzione}
+%    In questa presentazione viene analizzato e riassunto il contentuto dell'articolo \textbf{``Automated Model-Based Android GUI Testing
+%    using Multi-level GUI Comparison Criteria''} scritto da Young-Min Baek e Doo-Hwan Bae.
+%\\~\\
+%Presentazione preparata da 
 
-\end{frame}
-
+%\end{frame}
+\section{Introduzione}
 \begin{frame}
     \frametitle{GUI testing automatico(1)}
     \begin{block}{Perch\'e dedicare particolare attenzione alle applicazioni Android?}
@@ -275,6 +275,82 @@ Dato che si tratta essenzialmente di una ricerca locale nello spazio degli stati
 L'approccio proposto dagli autori \`e di costruire un grafo degli stati della GUI, utilizzando dei criteri di equivalenza (GUICC) per distinguere gli stati.
 \end{frame}
 
+\subsection{GUI Android}
+\begin{frame}
+    \frametitle{Modello GUI}
+Un altro approccio prevede l'uso del modello della GUI.
+Il modello GUI \`e un automa a stati finiti, dove gli stati dell'automa corrispondono agli stati dell'interfaccia grafica. L'automa transisce da uno stato all'altro al verificarsi di un evento.
+Il modello GUI viene rappresentrato da un multigrafo dove i nodi corrispondono agli stati e gli archi corrispondono alle transizioni. Ogni arco \`e etichettato dall'evento che provoca la transizione.
+
+Il concetto fondamentale necessario per la costruzione di questo grafo \`e il criterio di equivalenza degli stati.
+
+\end{frame}
+
+\begin{frame}{}
+
+    Le applicazioni Android spesso generano parte dell'interfaccia grafica in modo dinamico.
+    Per modellare correttamente la GUI biogna tener conto delle componenti dinamiche.
+
+    \begin{figure}
+    \includegraphics[width=0.8\linewidth]{images/Dynamic.png}
+    \end{figure}
+Un criterio d'equivalenza debole come "Nome Activity" in questo caso non sarebbe in grado di accorgersi della differenza tra gli stati.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Multi-Level
+GUI Comparison Criteria (Multi-Level GUICC)}
+La struttura a livelli definita dagli autori del paper \`e composta da:
+\begin{itemize}
+    \item \textbf{Nome pacchetto}. Quando l'activity corrente non appartiene allo stesso pacchetto dell'applicazione testata significa che l'applicazione testata \`e stata terminata oppure ha invocato un altra applicazione, in ogni caso lo stato corrente \`e considerato lo stato terminale.
+    \item \textbf{Nome Activity}. Quando l'activity corrente ha un nome diverso da quella precedente si tratta di uno stato diverso.
+    \item \textbf{Composizione Widget non-eseguibili}
+    \item \textbf{Composizione Widget eseguibili}
+    \item \textbf{Contenuti}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Generazione del modello}
+Dato che le applicazioni Android in genere non contengono un modello della GUI costruito dallo sviluppatore \`e stato sviluppato un metodo per dedurre il modello (\emph{Model learning}) da un applicazione tramite \emph{reverse engineering}(\emph{GUI Ripping}).
+\end{frame}
+
+\begin{frame}
+    \frametitle{Generazione del modello(2)}
+
+Per costruire il grafo della GUI vengono eseguiti iterativamente questi passaggi:
+\begin{itemize}
+    \item Generare un evento amissibile nello stato corrente.
+    \item Verificare tramite i criteri d'equivalenza se lo stato della GUI \`e cambiato.
+        In caso affermativo ci sono tre casi:
+        \begin{itemize}
+            \item Il nuovo stato \`e gi\`a presente come nodo nel grafo. Allora si aggiunge un arco dallo stato precedente al nuovo stato etichettato dall'evento che porta in questo stato.
+            \item Non esiste un nodo corrispondente, allora abbiamo scoperto uno stato nuovo. Viene generato un nuovo nodo e generato l'arco come nel primo caso.
+            \item Lo stato risultato \`e uno stato terminale, allora l'applicazione \`e terminata in seguito all'evento.(Terminazione normale o anormale dovuta ad un errore/eccezione).
+        \end{itemize}
+        In caso contrario si aggiunge un \emph{loop}(un arco che origina e termina nello stesso nodo) etichettato dall'evento.
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Architettura del sistema}
+    \begin{block}{Motore di testing}
+        Viene eseguito lato controllore.
+        \begin{itemize}
+            \item \textbf{Esecutore test} Sceglie l'input da mandare al software testato secondo un algoritmo(BFS).
+            \item \textbf{Generatore del grafo} descritto sopra.
+            \item \textbf{Error checker} Controlla la presenza di errori.
+        \end{itemize}
+    \end{block}
+    \begin{block}{Strato di comunicazione}
+        Serve per trasferire informazioni fra la macchina controllore e il dispositivo Android che esegue il software testato.
+    \end{block}
+    \begin{block}{Event agent}
+        Software eseguito sul dispositivo Android. Riceve messaggi dal contollore e genera input al software testato corrispondenti.
+    \end{block}
+\end{frame}
 
 
 \subsection{Subsection Example} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks

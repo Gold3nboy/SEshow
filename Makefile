@@ -9,6 +9,10 @@ target := presentation_1.pdf
 ttext := $(patsubst %.pdf,%.tex,$(target))
 all: $(target)
 
+.PHONY: show
+show:
+	evince $(target) 2> /dev/null &
+
 .PHONY: clean
 clean:		
 	        rm $(target)
