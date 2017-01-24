@@ -5,7 +5,7 @@ svgs := $(wildcard *.svg)
 pngs := $(patsubst %.svg,%.png,$(svgs))
 pngs := $(subst $(space),_,$(pngs))
 pngs := $(subst png_,png ,$(pngs))
-target := presentation_1.pdf
+target := final_version.pdf
 ttext := $(patsubst %.pdf,%.tex,$(target))
 all: $(target)
 
