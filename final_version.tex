@@ -44,7 +44,7 @@
 
 % watermark logo , you can choose width and position in a pretty accurate way
 %"anchor" and current page."x" play the game : north , south , etc.
-\setbeamertemplate{background}{\tikz[overlay,remember picture, anchor=south]\node[opacity=.15]at ([yshift=1.5cm]current page.south){\includegraphics[width=3cm]{images/sapienza-logo.png}};}
+\setbeamertemplate{background}{\tikz[overlay,remember picture, anchor=center]\node[opacity=.15]at ([yshift=0cm]current page.center){\includegraphics[width=3cm]{images/sapienza-logo.png}};}
 
 
 \definecolor{color1}{HTML}{001000} % Color of the article title and sections
@@ -250,14 +250,14 @@ Flatulenza, University of Prone \\ % Your institution for the title page
 \section{Introduzione}
 \begin{frame}
     \frametitle{GUI testing automatico(1)}
-    \begin{block}{Perch\'e dedicare particolare attenzione alle applicazioni Android?}
+    \begin{block}{Perch\`e dedicare particolare attenzione alle applicazioni Android?}
         Attualmente le applicazioni android comprendono quasi il 90\% del mercato di software mobile.
 
     \end{block}
     \begin{block}{Cos'\`e il GUI testing?}
         \`E una metodologia di testing che esplora una parte dello spazio degli stati del programma testato dando gli input al programma tramite l'interfaccia grafica.
     \end{block}
-    \begin{block}{Perch\'e automatizzare il testing?}
+    \begin{block}{Perch\`e automatizzare il testing?}
         Il motivo principale \`e il costo, l'esecuzione manuale dei test ha il costo eccessivo per molte applicazioni.
         Inoltre l'esecuzione manuale dei test richiede tanto tempo e a volte non \`e in grado di individuare tutti gli errori.
     \end{block}
@@ -364,12 +364,59 @@ Per costruire il grafo della GUI vengono eseguiti iterativamente questi passaggi
 %------------------------------------------------
 %------------------------------------------------
 %------------------------------------------------
+
+%------------------------------------------------
+{
+\setbeamertemplate{background}{\tikz[overlay,remember picture, anchor=center]\node[opacity=1]at ([yshift=-0.5cm]current page.center){\includegraphics[width=0.9\linewidth]{images/framework.png}};}
+
+\begin{frame}
+    \frametitle{GUI Testing 1 : Funzionamento del framework}
+
+
+
+\end{frame}
+}
+%------------------------------------------------
+{
+\setbeamertemplate{background}{\tikz[overlay,remember picture, anchor=center]\node[opacity=0.3]at ([yshift=-0.5cm]current page.center){\includegraphics[width=0.9\linewidth]{images/framework.png}};}
+
+\begin{frame}
+\frametitle{GUI Testing 2 : input e output}
+ figura in sfondo
+    Questo framework riceve in input:
+    \begin{itemize}
+        \item file \textbf{Android APK} (eseguibile dell'App);
+        \item \textbf{Max C-Lv},
+    \end{itemize}
+    \\~\\ 
+    e restituisce in output:
+    \begin{itemize}
+        \item un insieme di \textbf{sequenze di eventi} , eseguite sull'applicazione ;
+        \item un \textbf{grafo della GUI}, rappresentante gli stati esplorati e testati dell'app;
+        \item un \textbf{error report}, se il framework ha riscontrato qualche errore nell'app ,
+    \end{itemize}
+    che \`e di fatto il fine ultimo del testing.
+
+
+\end{frame}
+}
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Goal to reach}
+\frametitle{Obiettivo: Scovare l'errore}
  
-Osservare come la scelta dei  GUICC pu\`o influenzare il comportamento di una AUT (Application Under Test).
+    Automatizzare il processo di error-detection nella GUI di una app porta vantaggi :
+    \begin{enumerate}
+        \item di tempo, perch\`e non bisogna testare manualmente ogni possibilit\`a;
+        \item economici, perch\`e si evita che l' utente finale incappi in \textit{uncovered errors}, con ripercussioni sulla \textit{fame} dell'app.
+    \end{enumerate}
+    \\~\\
+    Lo scopo del \textbf{model-based GUI testing} \`e di rilevare i \textit{runtime erros} in modo automaticizzato.
+    \\~\\
+    Ovviamente, migliore \`e il \textbf{modello} su cui si basa il GUI testing, maggiori sono le probabilit\`a di individuare tutti i possibili \textit{runtime errors}. 
+
+
+
 
 \end{frame}
 
@@ -378,15 +425,15 @@ Osservare come la scelta dei  GUICC pu\`o influenzare il comportamento di una AU
 \begin{frame}
 \frametitle{Sono utili i GUICC ?}
 
-\begin{block}{Question 1}
+\begin{block}{Domanda 1}
 In che modo i \emph{GUICC} influenzano la generazione di modelli di comportamento delle app Android ?
 \end{block}
 
-\begin{block}{Question 2}
- I GUICC influenzano la quantit\`a di codice ottenuto ed eseguito durante la fase di GUI testing  ? 
+\begin{block}{Domanda 2}
+    I GUICC influenzano la \textbf{copertura di codice} durante la fase di GUI testing  ? 
 \end{block}
 
-\begin{block}{Question 3}
+\begin{block}{Domanda 3}
 I GUICC influenzano la capacit\`a di scovare errori durante la fase di GUI testing ?
 \end{block}
 
@@ -396,13 +443,13 @@ I GUICC influenzano la capacit\`a di scovare errori durante la fase di GUI testi
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Question 1}
+\frametitle{Domanda 1}
 
-\begin{block}{Question 1}
+\begin{block}{Domanda 1}
 In che modo i \emph{GUICC} influenzano la generazione di modelli di comportamento delle app Android ?
 \end{block}
 
-Per rispondere hanno preso alcune app, sia open source che proprietarie, e ne hanno generato vari GUI graphs, basandosi per ognuno su un diverso livello di "specificit\`a" dei GUICC .
+Sono state considerate varie apps, sia open source che proprietarie, e ne sono stati generati vari GUI graphs, ognuno basato su un diverso livello di "specificit\`a" dei GUICC .
 \\~\\
 
 Nella raccolta dei dati , i grafi generati con C-Lv 1 non sono stati considerati, poich\`e \`e un criterio troppo poco discriminante per ottenere risultati validi.
@@ -445,9 +492,9 @@ Nella raccolta dei dati , i grafi generati con C-Lv 1 non sono stati considerati
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Question 1}
+\frametitle{Domanda 1}
 
-\begin{block}{Question 1}
+\begin{block}{Domanda 1}
 In che modo i \emph{GUICC} influenzano la generazione di modelli di comportamento delle app Android ?
 \end{block} 
 \begin{block}{Risposta}
@@ -485,7 +532,7 @@ Inoltre non \`e detto che con grafi pi\`u grandi si riescano a coprire tutte le 
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Come misurare oggettivamente la quantit\`a di funzionalità testate ?}
+\frametitle{Come misurare oggettivamente la quantit\`a di funzionalit\`a testate ?}
 Per avere una misura oggettiva del numero di funzionalit\`a testate , si pu\`o misurare il numero di linee di codice effettivamente eseguite durante un test sul grafo .
 \\~\\
 
@@ -495,9 +542,9 @@ In generale , maggiore \`e il numero di linee di codice eseguite , maggiore \`e 
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Question 2}
-\begin{block}{Question 2}
- I GUICC influenzano la quantit\`a di codice ottenuto ed eseguito durante la fase di GUI testing  ? 
+\frametitle{Domanda 2}
+\begin{block}{Domanda 2}
+    I GUICC influenzano la \textbf{copertura di codice} durante la fase di GUI testing  ? 
 \end{block}
 \\~\\
 
@@ -536,9 +583,9 @@ I test sono stati effettuati sempre sullo stesso insieme di app open source e pr
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Question 2}
-\begin{block}{Question 2}
- I GUICC influenzano la quantit\`a di codice ottenuto ed eseguito durante la fase di GUI testing  ? 
+\frametitle{Domanda 2}
+\begin{block}{Domanda 2}
+    I GUICC influenzano la \textbf{copertura di codice} durante la fase di GUI testing  ? 
 \end{block}
 
 \begin{block}{Risposta}
@@ -551,9 +598,9 @@ Il livello di GUICC influenza in modo significativo la percentuale di codice ese
 
 
 \begin{frame}
-\frametitle{Question 3}
+\frametitle{Domanda 3}
 
-\begin{block}{Question 3}
+\begin{block}{Domanda 3}
 I GUICC influenzano la capacit\`a di scovare errori durante la fase di GUI testing ?
 \end{block}
 
@@ -577,10 +624,10 @@ I GUICC influenzano la capacit\`a di scovare errori durante la fase di GUI testi
 
 %------------------------------------------------
 \begin{frame}
-\frametitle{Question 3}
+\frametitle{Domanda 3}
 
-\begin{block}{Question 3}
-I GUICC influenzano la capacit\`a di scovare errori durante la fase di GUI testing ?
+\begin{block}{Domanda 3}
+I GUICC influenzano la capacit\`a di scovare errori durante la fase di GUI testing  ?
 \end{block}
 
 \begin{block}{Risposta}
@@ -590,7 +637,20 @@ Oltre a influenzare la quantit\`a di codice eseguito ,  il livello di GUICC infl
 \end{frame}
 
 %------------------------------------------------
+\begin{frame}
+\frametitle{Conclusione}
+La maggior parte delle tecniche di \textit{model-based Android GUI testing} esistenti non ha possibilit\`a di utilizzo pratico, poich\`e vengono trascurati alcuni comportamenti dinamici frequenti nelle applicazioni moderne.
+\\~\\
+Questo \`e il primo studio che si \`e concentrato sulla \textit{valutazione della generazione del modello} pi\`u che sulla applicazione del modello stesso su un qualche framework.
+\\~\\
+Da questa valutazione \`e emerso che i GUI Comparison Criteria sono molto vantaggiosi : si pu\`o scegliere il grado di dettaglio di un test (modificando il \textbf{Max C-Lv}) ed \`e possibile coprire un'alta percentuale di linee di codice eseguite , rilevando una altrettanto alta percentuale di \textbf{runtime errors}.
+\\~\\
+Manca un metodo che selezioni , per una data app , quali Comparison Criteria siano pi\`u adeguati per ottenere una pi\`u vasta copertura di codice e di errori. Tale metodo sar\`a oggetto di ricerca futura.
 
+
+\end{frame}
+
+%------------------------------------------------
 
 
 \end{document} 
