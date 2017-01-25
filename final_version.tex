@@ -426,7 +426,7 @@ Per costruire il grafo della GUI vengono eseguiti iterativamente questi passaggi
 \frametitle{Sono utili i GUICC ?}
 
 \begin{block}{Domanda 1}
-In che modo i \emph{GUICC} influenzano la generazione di modelli di comportamento delle app Android ?
+In che modo i \emph{GUICC} influenzano la generazione del \textit{behavior model} delle app Android ?
 \end{block}
 
 \begin{block}{Domanda 2}
@@ -446,7 +446,7 @@ I GUICC influenzano la capacit\`a di scovare errori durante la fase di GUI testi
 \frametitle{Domanda 1}
 
 \begin{block}{Domanda 1}
-In che modo i \emph{GUICC} influenzano la generazione di modelli di comportamento delle app Android ?
+In che modo i \emph{GUICC} influenzano la generazione del \textit{behavior model} delle app Android ?
 \end{block}
 
 Sono state considerate varie apps, sia open source che proprietarie, e ne sono stati generati vari GUI graphs, ognuno basato su un diverso livello di "specificit\`a" dei GUICC .
@@ -483,7 +483,7 @@ Nella raccolta dei dati , i grafi generati con C-Lv 1 non sono stati considerati
 
 \item C-Lv 2 \`e un criterio meno "espressivo" di C-Lv5 ;
 
-\item ATTENZIONE: app come X (per la gestione del ...) o come Davik (gestione dei processi) generano stati infiniti e il grafo esplode .
+\item ATTENZIONE: app come Sanity o come DalvikExplorrer (gestione della \textit{Dalvik virtual machine}) generano stati infiniti e il grafo esplode .
 
 \end{itemize}
 
@@ -495,7 +495,7 @@ Nella raccolta dei dati , i grafi generati con C-Lv 1 non sono stati considerati
 \frametitle{Domanda 1}
 
 \begin{block}{Domanda 1}
-In che modo i \emph{GUICC} influenzano la generazione di modelli di comportamento delle app Android ?
+In che modo i \emph{GUICC} influenzano la generazione del \textit{behavior model} delle app Android ?
 \end{block} 
 \begin{block}{Risposta}
 Criteri pi\`u "specializzati" possono rendere il GUI states graph pi\`u completo ed esaustivo , ma livelli eccessivamente fine-grained di selezione non  migliorano la qualit\`a del grafo .
@@ -520,7 +520,7 @@ Quando si inizia a comparare \textbf{in base al testo inserito} per\`o il numero
 
 \begin{frame}
 \frametitle{Wider is not better ...}
-Testare applicazioni simili a Calculator \textbf{\textit{ \`e complicato}} , poich\`e pi\`u specifico \`e \textbf{Max C-Lv} , pi\`u grande \`e il grafo risultante.
+Testare applicazioni simili a Calculator  \`e complicato , poich\`e pi\`u specifico \`e \textbf{Max C-Lv} , pi\`u grande \`e il grafo risultante.
 \\~\\
 
 Grafi molto grandi talvolta contengono ScreenNodes diversi da cui possono essere avviati eventi uguali , quindi i test perdono molto tempo su input simili.
@@ -547,39 +547,43 @@ In generale , maggiore \`e il numero di linee di codice eseguite , maggiore \`e 
     I GUICC influenzano la \textbf{copertura di codice} durante la fase di GUI testing  ? 
 \end{block}
 \\~\\
-
 I test sono stati effettuati sempre sullo stesso insieme di app open source e proprietarie.
 
 \end{frame}
 
 %------------------------------------------------
+{
+\setbeamertemplate{background}{\tikz[overlay,remember picture, anchor=center]\node[opacity=1]at ([yshift=0cm]current page.center){\includegraphics[width=0.9\linewidth]{images/LOCcoverage.png}};}
 
 \begin{frame}
-\frametitle{Linee di codice eseeguite nelle App testate}
-\begin{figure}
-\includegraphics[width=0.8\linewidth]{images/LOCcoverage.png}
-\end{figure}
+\frametitle{Linee di codice eseguite nelle App testate}
+
+
+
 \end{frame}
+}
 
 %------------------------------------------------
+{
+%\setbeamertemplate{background}{\tikz[overlay,remember picture, anchor=center]\node[opacity=0.25]at ([yshift=0cm]current page.center){\includegraphics[width=0.9\linewidth]{images/LOCcoverage.png}};}
 
 \begin{frame}
 \frametitle{Osservazioni}
 %(grafico risultati sullo sfondo)
 
 \begin{itemize}
-\item le colonne "A" contengono la percentuale di codice eseguito durante un test con Max C-Lv pari a 2 , ossia test eseguiti con il criterio degli activity name;
+\item le colonne \textit{A} contengono la \textbf{percentuale di copertura di codice} di un test con Max C-Lv pari a 2 , ossia test eseguiti con il criterio degli activity name;
 
-\item le colonne "C-Lv" e "M" vanno lette insieme : "C-Lv" indica il livello a cui viene raggiunta la massima percentuale di codice eseguito "M";
+\item le colonne \textit{C-Lv} e \textit{M} vanno lette insieme : \textit{C-Lv} indica il livello a cui viene raggiunta la massima percentuale di codice eseguito \textit{M};
 
 \item ci sono alcune eccezioni , dovute per\`o a specifici casi particolari;
 
-\item si nota chiaramente che livelli pi\`u specializzati di GUICC coprono una maggior percentuale di codice eseguito
+\item si nota chiaramente che \emph{ \textbf{a livelli pi\`u specializzati di GUICC corrisponde una maggior copertura di codice} }
 \end{itemize}
 
 
 \end{frame}
-
+}
 %------------------------------------------------
 
 \begin{frame}
